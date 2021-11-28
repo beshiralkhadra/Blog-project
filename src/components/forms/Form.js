@@ -18,18 +18,15 @@ class Form extends Component {
   handleonChange = (e) => {
     const { name, value } = e.target;
 
-    this.setState(
-      {
-        ...this.state,
-        [name]: value,
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      ...this.state,
+      [name]: value,
+    });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(e.target.username.value);
+
     const { email, username, password, Rpassword } = e.target;
     let data = {
       username: username.value,
@@ -38,17 +35,25 @@ class Form extends Component {
       Rpassword: Rpassword.value,
       isApproved: true,
     };
-    let updatedData = [];
-    updatedData.push(...updatedData, data);
-    console.log(updatedData);
-    localStorage.setItem("user", JSON.stringify(updatedData));
+    let updatedData = new Array();
+    updatedData = JSON.parse(localStorage.getItem("user"))
+      ? JSON.parse(localStorage.getItem("user"))
+      : [];
 
-    this.setState((prevState) => ({
-      isApproved: !prevState.isApproved,
-    }));
-    this.props.history.push({
-      pathname: `/Loginform`,
-    });
+    console.log(updatedData);
+    if (updatedData.some((v) => v.email === this.state.email)) {
+      alert("email already exist");
+    } else {
+      updatedData.push(data);
+      localStorage.setItem("user", JSON.stringify(updatedData));
+
+      this.setState((prevState) => ({
+        isApproved: !prevState.isApproved,
+      }));
+      this.props.history.push({
+        pathname: `/Loginform`,
+      });
+    }
   };
 
   render() {

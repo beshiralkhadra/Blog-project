@@ -14,28 +14,33 @@ class Loginform extends Component {
       //   }]
     };
   }
-  handleLoginEmail = (event) => {
-    this.setState({ loginEmail: event.target.value });
-  };
-  handleLoginPassword = (event) => {
-    this.setState({ loginPassword: event.target.value });
+  handleonChange = (e) => {
+    const { name, value } = e.target;
+
+    this.setState({
+      ...this.state,
+      [name]: value,
+    });
   };
   handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (
-      this.state.loginEmail == "admin@gmail.com" &&
-      this.state.loginPassword == "123456"
-    ) {
+    const { loginEmail, loginPassword } = e.target;
+    let loginData = {
+      loginEmail: loginEmail.value,
+      loginPassword: loginPassword.value,
+    };
+    let loginUpdatedData = new Array();
+    loginUpdatedData = JSON.parse(localStorage.getItem("user"))
+      ? JSON.parse(localStorage.getItem("user"))
+      : [];
+    console.log(this.state.loginEmail);
+    if (loginUpdatedData.some((c) => c.email === this.state.loginEmail)) {
       this.props.history.push({
         pathname: `/share`,
       });
     } else {
-      console.log(this.state.loginEmail);
-      this.props.history.push({
-        pathname: `/share`,
-      });
+      alert("incorrect email ");
     }
-    // console.log("helllo");
   };
   render() {
     return (
@@ -44,17 +49,19 @@ class Loginform extends Component {
           <span className="login-title">Login</span>
           <label>Email</label>
           <input
+            name="loginEmail"
             type="email"
             value={this.state.loginEmail}
-            onChange={this.handleLoginEmail}
+            onChange={this.handleonChange}
             placeholder="enter your email"
             required
           />
           <label>password</label>
           <input
+            name="loginPassword"
             type="password"
             value={this.state.loginPassword}
-            onChange={this.handleLoginPassword}
+            onChange={this.handleonChange}
             placeholder="enetr your password"
             required
           />

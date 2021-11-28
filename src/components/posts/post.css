@@ -28,6 +28,9 @@
 .postCenter {
   margin: 1em 0;
 }
+.postText {
+  padding: 1em;
+}
 .postBottom {
   display: flex;
   align-items: center;
@@ -39,7 +42,14 @@
 }
 .like-btn {
   margin: 1em;
-  padding: 1em;
+  border-radius: 10px;
+  padding: 0.7em;
+  background-color: blue;
+  color: aliceblue;
+  cursor: pointer;
+}
+.like-btn:hover {
+  transform: scale(1.1);
 }
 .postLikeCounter {
   font-size: 1.2rem;
