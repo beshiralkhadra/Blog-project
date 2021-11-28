@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, history } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
-// import Counters from "./components/counter/Counters";
 import Form from "./components/forms/Form";
 import Loginform from "./components/forms/Loginform";
-import Home from "./components/home/Home";
-import FinalBuild from "./components/home/BuildNewPost";
-// import Feed from "./components/Feed/Feed";
-import Post from "./components/posts/Post";
+
 import Share from "./components/share/Share";
 
 class App extends Component {

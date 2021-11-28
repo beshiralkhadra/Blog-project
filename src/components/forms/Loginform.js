@@ -32,7 +32,7 @@ class Loginform extends Component {
     } else {
       console.log(this.state.loginEmail);
       this.props.history.push({
-        pathname: `/Home`,
+        pathname: `/share`,
       });
     }
     // console.log("helllo");
